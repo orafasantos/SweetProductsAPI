@@ -1,0 +1,20 @@
+{
+  "name": "frontendforprojeto",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tailwindcss -i ./input.css -o ./styles.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.13",
+    "@tailwindcss/postcss": "^4.0.13",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.13"
+  }
+}
