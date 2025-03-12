@@ -6,7 +6,7 @@ import { authenticate, isAdmin } from "../middleware/auth.middleware";
 import {
   getCurrentUser,
   getAllUsers,
-  getUSerById,
+  getUserById,
   updateUser,
   deleteUser,
 } from "../controllers/user.controller";
@@ -27,7 +27,7 @@ export default async function userRoutes(fastify: FastifyInstance) {
 
   fastify.get("/:id", {
     preHandler: [authenticate, isAdmin],
-    handler: getUSerById,
+    handler: getUserById,
   });
 
   fastify.put("/:id", {

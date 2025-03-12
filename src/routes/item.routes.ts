@@ -1,9 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { itemSchema } from "../schemas/item.schema";
 import { authenticate, isAdmin } from "../middleware/auth.middleware";
-
-// Controllers will be implemented here
-
 import {
   createItem,
   getAllItems,
@@ -13,25 +10,18 @@ import {
 } from "../controllers/item.controller";
 
 export default async function itemRoutes(fastify: FastifyInstance) {
-  // Public Routes
-
+  // Rotas públicas
   fastify.get("/", getAllItems);
   fastify.get("/:id", getItemById);
 
-  // Protected Routes (adminOnly)
+  // Rotas protegidas (apenas admin)
   fastify.post("/", {
     preHandler: [authenticate, isAdmin],
-    schema: {
-      body: itemSchema,
-    },
     handler: createItem,
   });
 
   fastify.put("/:id", {
     preHandler: [authenticate, isAdmin],
-    schema: {
-      body: itemSchema,
-    },
     handler: updateItem,
   });
 

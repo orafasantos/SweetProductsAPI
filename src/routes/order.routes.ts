@@ -4,8 +4,6 @@ import {
   updateOrderStatusSchema,
 } from "../schemas/order.schema";
 import { authenticate, isAdmin } from "../middleware/auth.middleware";
-
-// Controllers serão implementados posteriormente
 import {
   createOrder,
   getUserOrders,
@@ -18,9 +16,6 @@ export default async function orderRoutes(fastify: FastifyInstance) {
   // Rotas para usuários autenticados
   fastify.post("/", {
     preHandler: [authenticate],
-    schema: {
-      body: createOrderSchema,
-    },
     handler: createOrder,
   });
 
@@ -42,9 +37,6 @@ export default async function orderRoutes(fastify: FastifyInstance) {
 
   fastify.patch("/:id/status", {
     preHandler: [authenticate, isAdmin],
-    schema: {
-      body: updateOrderStatusSchema,
-    },
     handler: updateOrderStatus,
   });
 }

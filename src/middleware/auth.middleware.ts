@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import jwt from "jsonwebtoken";
 import { Role } from "@prisma/client";
+import "@fastify/jwt";
 
 export interface AuthPayload {
   id: string;
@@ -8,57 +9,34 @@ export interface AuthPayload {
   role: Role;
 }
 
-// Middleware to auth users
-
+// Middleware para autenticar usuários
 export async function authenticate(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
   try {
-    const authHeader = request.headers.authorization;
-
-    if (!authHeader) {
-      return reply.status(401).send({ message: "Token nao fornecido" });
-    }
-
-    const [, token] = authHeader.split(" ");
-
-    if (!token) {
-      return reply.status(401).send({ message: "Token nao fornecido" });
-    }
-
-    try {
-      const decoded = jwt.verify(
-        token,
-        process.env.JWT_SECRET || "supermegasenha"
-      ) as AuthPayload;
-
-      request.user = decoded;
-    } catch (error) {
-      return reply.status(401).send({ message: "Token inválido" });
-    }
+    await request.jwtVerify();
   } catch (error) {
-    console.error(error);
-    return reply
-      .status(500)
-      .send({ message: "internal server error, my fault sorry" });
+    return reply.status(401).send({
+      message: "Não autorizado - Token inválido ou expirado",
+    });
   }
 }
 
-// Middleware to verify if the user is Admin
-
+// Middleware para verificar se o usuário é admin
 export async function isAdmin(request: FastifyRequest, reply: FastifyReply) {
   if (!request.user || request.user.role !== "ADMIN") {
-    return reply
-      .status(403)
-      .send({ message: "Deny access, only admins feature" });
+    return reply.status(403).send({
+      message:
+        "Acesso negado. Apenas administradores podem acessar este recurso.",
+    });
   }
 }
 
-// Type user definition for fastify,
-
-declare module "fastify" {
-  interface FastifyRequest {
-    user?: AuthPayload;
+// Estender a definição do JWT payload
+declare module "@fastify/jwt" {
+  interface FastifyJWT {
+    payload: AuthPayload;
+    user: AuthPayload;
   }
 }

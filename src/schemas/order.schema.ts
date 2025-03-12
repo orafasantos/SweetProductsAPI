@@ -1,7 +1,6 @@
 import { z } from "zod";
-import { OrderStatus } from "@prisma/client";
 
-// Schema for item inside the order
+// Schema para validação de itens do pedido
 const orderItemSchema = z.object({
   itemId: z.string().uuid({ message: "ID do item inválido" }),
   quantity: z
@@ -10,21 +9,21 @@ const orderItemSchema = z.object({
     .positive({ message: "Quantidade deve ser um número positivo" }),
 });
 
-// Schema for order creation
+// Schema para criação de pedido
 export const createOrderSchema = z.object({
   items: z
     .array(orderItemSchema)
     .nonempty({ message: "O pedido deve conter pelo menos um item" }),
 });
 
-// Schema for update order status
+// Schema para atualização de status do pedido - usando valores literais
 export const updateOrderStatusSchema = z.object({
-  status: z.nativeEnum(OrderStatus, {
+  status: z.enum(["PENDING", "PROCESSING", "COMPLETED", "CANCELLED"], {
     errorMap: () => ({ message: "Status inválido" }),
   }),
 });
 
-// Type of schemas
+// Tipos inferidos dos schemas
 export type CreateOrderInput = z.infer<typeof createOrderSchema>;
 export type UpdateOrderStatusInput = z.infer<typeof updateOrderStatusSchema>;
 export type OrderItemInput = z.infer<typeof orderItemSchema>;
