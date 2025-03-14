@@ -1,9 +1,10 @@
 import { FastifyInstance } from "fastify";
 import { authenticate, isAdmin } from "../middleware/auth.middleware";
+import { FastifyRequest, FastifyReply } from "fastify";
 import prisma from "../models/index";
 
 // Controller para estatísticas do admin
-async function getDashboardStats(request, reply) {
+async function getDashboardStats(request: FastifyRequest, reply: FastifyReply) {
   try {
     // Total de usuários
     const usersCount = await prisma.user.count();

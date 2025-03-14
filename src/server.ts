@@ -24,7 +24,10 @@ async function app() {
   try {
     // Registrar plugins
     await server.register(cors, {
-      origin: true, // Em produção, defina os domínios permitidos
+      origin: true,
+      methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+      credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization"], // Em produção, defina os domínios permitidos
     });
 
     await server.register(fjwt, {
