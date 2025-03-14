@@ -1,8 +1,5 @@
 import { FastifyInstance } from "fastify";
 import { authenticate, isAdmin } from "../middleware/auth.middleware";
-
-// Controllers that will be here
-
 import {
   getCurrentUser,
   getAllUsers,
@@ -12,14 +9,13 @@ import {
 } from "../controllers/user.controller";
 
 export default async function userRoutes(fastify: FastifyInstance) {
-  // Route to get current user (protected)
+  // Rota para obter o usuário atual (protegida)
   fastify.get("/me", {
     preHandler: [authenticate],
     handler: getCurrentUser,
   });
 
-  // Route to user administration (admin only)
-
+  // Rotas para administração de usuários (apenas admin)
   fastify.get("/", {
     preHandler: [authenticate, isAdmin],
     handler: getAllUsers,

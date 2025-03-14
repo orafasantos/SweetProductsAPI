@@ -1,5 +1,4 @@
 import { FastifyInstance } from "fastify";
-import { itemSchema } from "../schemas/item.schema";
 import { authenticate, isAdmin } from "../middleware/auth.middleware";
 import {
   createItem,

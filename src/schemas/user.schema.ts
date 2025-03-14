@@ -12,7 +12,7 @@ export const userSchema = z.object({
 // Schema para validação de login
 export const loginSchema = z.object({
   email: z.string().email({ message: "Email inválido" }),
-  password: z.string().min(1, { message: "Senha é obrigatória" }),
+  password: z.string().min(6, { message: "Senha é obrigatória" }),
 });
 
 // Tipos inferidos dos schemas

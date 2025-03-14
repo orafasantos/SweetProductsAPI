@@ -12,6 +12,7 @@ import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
 import itemRoutes from "./routes/item.routes";
 import orderRoutes from "./routes/order.routes";
+import adminRoutes from "./routes/admin.routes";
 
 // Criação da instância do Fastify
 const server: FastifyInstance = Fastify({
@@ -47,6 +48,7 @@ async function app() {
     server.register(userRoutes, { prefix: "/api/users" });
     server.register(itemRoutes, { prefix: "/api/items" });
     server.register(orderRoutes, { prefix: "/api/orders" });
+    server.register(adminRoutes, { prefix: "/api/admin" });
 
     // Rota de healthcheck
     server.get("/health", async () => {

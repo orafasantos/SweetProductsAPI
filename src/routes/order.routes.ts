@@ -1,8 +1,4 @@
 import { FastifyInstance } from "fastify";
-import {
-  createOrderSchema,
-  updateOrderStatusSchema,
-} from "../schemas/order.schema";
 import { authenticate, isAdmin } from "../middleware/auth.middleware";
 import {
   createOrder,
