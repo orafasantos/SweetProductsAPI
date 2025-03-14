@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+      <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold">Painel Administrativo</h1>
+        <link rel="stylesheet" href="./input.css" />
+        <link href="./output.css" rel="stylesheet" />
+        <a href="index.html" class="text-blue-500 hover:text-blue-700"
+          >Voltar para loja</a
+        >
+      </div>
+
+      <!-- Verificação de autorização -->
+      <div
+        id="auth-check"
+        class="hidden bg-red-100 border border-red-400 text-red-700 p-4 rounded mb-4"
+      >
+        <p>
+          Você não tem permissão para acessar esta página. Redirecionando...
+        </p>
+      </div>
+
+      <!-- Conteúdo do painel admin -->
+      <div id="admin-content" class="hidden">
+        <!-- Tabs de navegação -->
+        <div class="mb-6 border-b">
+          <ul class="flex flex-wrap -mb-px">
+            <li class="mr-2">
+              <button
+                id="tab-dashboard"
+                class="inline-block p-4 border-b-2 border-blue-500 rounded-t-lg active"
+              >
+                Dashboard
+              </button>
+            </li>
+            <li class="mr-2">
+              <button
+                id="tab-products"
+                class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
+              >
+                Produtos
+              </button>
+            </li>
+            <li class="mr-2">
+              <button
+                id="tab-users"
+                class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
+              >
+                Usuários
+              </button>
+            </li>
+            <li class="mr-2">
+              <button
+                id="tab-orders"
+                class="inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300"
+              >
+                Pedidos
+              </button>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Conteúdo do Dashboard -->
+        <div id="tab-content-dashboard" class="tab-content">
+          <!-- Cards de estatísticas -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="bg-white p-4 rounded shadow">
+              <h3 class="text-gray-500 text-sm font-semibold">
+                Total de Usuários
+              </h3>
+              <p id="users-count" class="text-3xl font-bold">-</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+              <h3 class="text-gray-500 text-sm font-semibold">
+                Total de Produtos
+              </h3>
+              <p id="products-count" class="text-3xl font-bold">-</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+              <h3 class="text-gray-500 text-sm font-semibold">
+                Total de Pedidos
+              </h3>
+              <p id="orders-count" class="text-3xl font-bold">-</p>
+            </div>
+            <div class="bg-white p-4 rounded shadow">
+              <h3 class="text-gray-500 text-sm font-semibold">Receita Total</h3>
+              <p id="revenue" class="text-3xl font-bold">R$ -</p>
+            </div>
+          </div>
+
+          <!-- Gráficos e análises -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <!-- Produtos mais vendidos -->
+            <div class="bg-white p-4 rounded shadow">
+              <h2 class="text-lg font-semibold mb-4">Produtos Mais Vendidos</h2>
+              <div id="top-products">
+                <p class="text-gray-500">Carregando...</p>
+              </div>
+            </div>
+
+            <!-- Pedidos por status -->
+            <div class="bg-white p-4 rounded shadow">
+              <h2 class="text-lg font-semibold mb-4">Pedidos por Status</h2>
+              <div id="orders-by-status">
+                <p class="text-gray-500">Carregando...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conteúdo da Gestão de Produtos -->
+        <div id="tab-content-products" class="tab-content hidden">
+          <div class="flex justify-between mb-4">
+            <h2 class="text-xl font-semibold">Gestão de Produtos</h2>
+            <button
+              id="add-product-button"
+              class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+            >
+              Adicionar Produto
+            </button>
+          </div>
+
+          <!-- Formulário para adicionar/editar produto (inicialmente escondido) -->
+          <div
+            id="product-form-container"
+            class="hidden bg-white p-4 rounded shadow mb-4"
+          >
+            <h3 class="font-semibold mb-3">Adicionar/Editar Produto</h3>
+            <form id="product-form" class="space-y-3">
+              <input type="hidden" id="product-id" />
+              <div>
+                <label class="block text-gray-700 mb-1">Nome</label>
+                <input
+                  type="text"
+                  id="product-name"
+                  class="w-full border p-2 rounded"
+                  required
+                />
+              </div>
+              <div>
+                <label class="block text-gray-700 mb-1">Descrição</label>
+                <textarea
+                  id="product-description"
+                  class="w-full border p-2 rounded"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div>
+                <label class="block text-gray-700 mb-1">Preço (R$)</label>
+                <input
+                  type="number"
+                  id="product-price"
+                  class="w-full border p-2 rounded"
+                  step="0.01"
+                  min="0"
+                  required
+                />
+              </div>
+              <div class="flex items-center">
+                <input type="checkbox" id="product-available" class="mr-2" />
+                <label for="product-available">Produto disponível</label>
+              </div>
+              <div class="flex space-x-2">
+                <button
+                  type="submit"
+                  class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                >
+                  Salvar
+                </button>
+                <button
+                  type="button"
+                  id="cancel-product"
+                  class="bg-gray-300 text-gray-800 px-4 py-2 rounded hover:bg-gray-400"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Lista de produtos -->
+          <div class="bg-white rounded shadow overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Nome
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Preço
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Status
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Ações
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                id="products-list"
+                class="bg-white divide-y divide-gray-200"
+              >
+                <!-- Produtos serão carregados aqui -->
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap" colspan="4">
+                    Carregando produtos...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Conteúdo da Gestão de Usuários -->
+        <div id="tab-content-users" class="tab-content hidden">
+          <h2 class="text-xl font-semibold mb-4">Gestão de Usuários</h2>
+
+          <!-- Lista de usuários -->
+          <div class="bg-white rounded shadow overflow-hidden">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Nome
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Email
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Tipo
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Data de Registro
+                  </th>
+                  <th
+                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Ações
+                  </th>
+                </tr>
+              </thead>
+              <tbody id="users-list" class="bg-white divide-y divide-gray-200">
+                <!-- Usuários serão carregados aqui -->
+                <tr>
+                  <td class="px-6 py-4 whitespace-nowrap" colspan="5">
+                    Carregando usuários...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Conteúdo da Gestão de Pedidos -->
+        <div id="tab-content-orders" class="tab-content hidden">
+          <h2 class="text-xl font-semibold mb-4">Gestão de Pedidos</h2>
+
+          <!-- Filtros de pedidos -->
+          <div class="bg-white p-4 rounded shadow mb-4">
+            <h3 class="font-semibold mb-2">Filtrar pedidos</h3>
+            <div class="flex space-x-2">
+              <button
+                class="order-filter px-3 py-1 rounded border active"
+                data-status="all"
+              >
+                Todos
+              </button>
+              <button
+                class="order-filter px-3 py-1 rounded border"
+                data-status="PENDING"
+              >
+                Pendentes
+              </button>
+              <button
+                class="order-filter px-3 py-1 rounded border"
+                data-status="PROCESSING"
+              >
+                Em Processamento
+              </button>
+              <button
+                class="order-filter px-3 py-1 rounded border"
+                data-status="COMPLETED"
+              >
+                Concluídos
+              </button>
+              <button
+                class="order-filter px-3 py-1 rounded border"
+                data-status="CANCELLED"
+              >
+                Cancelados
+              </button>
+            </div>
+          </div>
+
+          <!-- Lista de pedidos -->
+          <div id="orders-list" class="space-y-4">
+            <!-- Pedidos serão carregados aqui -->
+            <p class="text-center py-4">Carregando pedidos...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/admin.js"></script>
+  </body>
+</html>
