@@ -31,7 +31,7 @@ My first back-end build with Fastify, TypeScript, Postgresql, Zod ande Prisma, w
 <table>
   <tr>
     <td>⚛️ <b>Frontend</b></td>
-    <td>React.js + Astro.js</td>
+    <td>React.js + Astro.js (available on version2.0/soon</td>
   </tr>
   <tr>
     <td>🎨 <b>Styling</b></td>
