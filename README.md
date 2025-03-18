@@ -51,7 +51,7 @@ My first back-end build with Fastify, TypeScript, Postgresql, Zod and Prisma, wi
 <br />
 <table>
   <tr>
-    <td>🔗 <b>Creating account and login system, consuming itens, creating orders, and a Admin pannel to manage users and Products</b></td>
+    <td>🔗 <b>Creating account and login system, consuming items, creating orders, and a Admin pannel to manage users and Products</b></td>
     <td>Users can create orders, consume products and see their list of Orders</td>
   </tr>
   <tr>
