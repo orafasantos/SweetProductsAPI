@@ -1,8 +1,12 @@
 # API SIMPLE CRUD
 
+<p align="center">
+  <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWVkZnppY3VrOGV2bHJ4M2JwbnM1eG1rdnl0cmd0NW82cGd2emR1ZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/LPGau0KmUGqjafNvwj/giphy.gif" alt="Centered GIF">
+</p>
+
 <br />
 <p align="center">
-  First BACK END
+  API build with Fastify, TypeScript, Postgresql, Zod and Prisma
 </p>
 
 ## 💫 About
