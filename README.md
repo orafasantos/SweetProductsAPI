@@ -8,7 +8,7 @@
 ## 💫 About
 
 <br />
-My first back-end build with Fastify, TypeScript, Postgresql, Zod ande Prisma, will connect to a Frontend Application with Astro.js and React
+My first back-end build with Fastify, TypeScript, Postgresql, Zod and Prisma, will connect to a Frontend Application with Astro.js and React
 <br />
 <br />
 <br />
