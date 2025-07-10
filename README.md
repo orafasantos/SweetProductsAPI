@@ -1,21 +1,24 @@
-# API SIMPLE CRUD
+# Sweets Management API
 
-<p align="center">
-  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExOTA3M3QycWFvZ2IzaHMweWZocTBkejJjazB0Ym9vYTJlYTlwZmt1eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/prBuHBOxdWzEH69RH7/giphy.gif" alt="Centered GIF">
-</p>
+## 📖 About the Project
 
-<br />
-<p align="center">
-  API build with Fastify, TypeScript, Postgresql, Zod and Prisma
-</p>
+This is a RESTful API designed for managing a candy store. The application allows for product registration, order management, and user control with different access levels, built with a modern and high-performance tech stack.
 
-## 💫 About
+## ✨ Features
 
-<br />
-My first back-end build with Fastify, TypeScript, Postgresql, Zod and Prisma, will connect to a Frontend Application with Astro.js and React
-<br />
-<br />
-<br />
+  - **User Authentication:** Secure login system with robust validation.
+  - **Product Management:**
+      - Add new sweets to the menu.
+      - Update information on existing products.
+      - Remove products from the menu.
+      - List all available products.
+  - **Order Control:**
+      - Customers can create new orders.
+      - Administrators can view and manage orders.
+      - Update order status (e.g., `Pending`, `Processing`, `Shipped`, `Delivered`).
+  - **Access Levels:**
+      - **Admin:** Full access to all features.
+      - **Customer:** Can view products and place orders.
 
 ## 🚀 Tech Stack
 
