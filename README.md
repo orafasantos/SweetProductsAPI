@@ -42,7 +42,7 @@ This will clone the project, install all dependencies, and prepare the database.
 
 ```bash
 # Clone the project and enter the directory
-git clone https://github.com/orafasantos/apiProject-Users-Orders-And-Products.git
+git clone https://github.com/orafasantos/SweetProductsAPI.git
 cd SweetProductsAPI
 
 # Create the .env file for the database connection
