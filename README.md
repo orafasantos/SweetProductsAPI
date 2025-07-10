@@ -112,14 +112,6 @@ Below are some examples of the main available endpoints.
   - `GET /orders` - Lists all orders (admin route).
   - `PATCH /orders/:id` - Updates an order's status (admin route).
 
-## 🤝 How to Contribute
-
-If you want to contribute to the project, please follow these steps:
-
-1.  Fork the repository.
-2.  Create a new branch with your changes: `git checkout -b my-feature`
-3.  Save your changes and create a commit message describing what you did: `git commit -m "feat: My new feature"`
-4.  Push your changes: `git push origin my-feature`
 
 ## 📜 License
 
